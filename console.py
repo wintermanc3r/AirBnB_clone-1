@@ -42,7 +42,7 @@ class HBNBCommand(cmd.Cmd):
                     value = args[x].split("=")[1]
                     try:
                         if (value[0] == '"' and value[-1] == '"') or (
-                        value[0] == "'" and value[-1] == "'"):
+                                value[0] == "'" and value[-1] == "'"):
                             value = str(value[1:-1])
                         elif '.' in value:
                             value = float(value)
