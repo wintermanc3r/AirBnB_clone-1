@@ -22,18 +22,39 @@ class HBNBCommand(cmd.Cmd):
         print("")
         return True
 
-    def do_create(self, args):
+    def do_create(self, args, **kwargs):
         """Create a new Basemodel"""
         args = args.split()
-        if len(args) != 1:
+        if len(args) < 1:
             print("** class name missing **")
-        else:
-            if len(args) > 0 and args[0] in HBNBCommand.valid_classes:
-                new_obj = eval(args[0])()
-                print(new_obj.id)
-                new_obj.save()
-            else:
-                return
+            return
+        if args[0] in HBNBCommand.valid_classes:
+            if len(args) > 1:
+                for x in range(1, len(args)):
+                    if "=" not in args[x]:
+                        print("** invalid parameters **")
+                        return
+            new_obj = eval(args[0])()
+            print(new_obj.id)
+            if len(args) > 1:
+                for x in range(1, len(args)):
+                    key = args[x].split("=")[0]
+                    value = args[x].split("=")[1]
+                    try:
+                        if (value[0] == '"' and value[-1] == '"') or (
+                        value[0] == "'" and value[-1] == "'"):
+                            value = str(value[1:-1])
+                        elif '.' in value:
+                            value = float(value)
+                        else:
+                            value = int(value)
+                    except:
+                        """ this will prevent it from saving, not sure
+                        if that's the desired outcome for the project """
+                        print("** invalid parameters **")
+                        return
+                    new_obj.__dict__[key] = value
+            new_obj.save()
 
     def do_show(self, args):
         """Usage: show BaseModel 1234-1234-1234"""
