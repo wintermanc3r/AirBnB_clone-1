@@ -23,7 +23,16 @@ class HBNBCommand(cmd.Cmd):
         return True
 
     def do_create(self, args, **kwargs):
-        """Create a new Basemodel"""
+        """
+        Creates a model of a given classname.
+
+        Supports optional arguments for setting attributes on creation.
+
+        Syntax: create <classname> <arg1> <arg2> <arg3>
+
+        Arguments must contain an "=" and be formatted like so:
+        string="hello" float=6.36 int=27
+        """
         args = args.split()
         if len(args) < 1:
             print("** class name missing **")
