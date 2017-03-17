@@ -8,7 +8,10 @@ The project is currently in its first phase, where we are creating a command lin
 
 ----------------------------------------
 
-**Authors**
+**Forked/Maintained By**
+- **Timothy Britton**, \<timothy.britton@holbertonschool.com>, @wintermanc3r
+
+**Original Authors**
 - **Philip Yoo**, \<philip.yoo@holbertonschool.com>, @philipYoo10
 - **Jianqin Wang**, \<jianqin.wang@holbertonschool.com>, @jianqinwang94
 
