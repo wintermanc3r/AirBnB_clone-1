@@ -6,6 +6,7 @@ from sqlalchemy import create_engine
 from models.base_model import Base
 from sqlalchemy import inspect
 
+
 class DBStorage:
     __engine = None
     __session = None

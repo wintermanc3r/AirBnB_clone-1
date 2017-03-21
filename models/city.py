@@ -5,6 +5,7 @@ from models.base_model import Base
 from models.state import State
 from sqlalchemy import Column, Integer, String, ForeignKey
 
+
 class City(BaseModel, Base):
     if os.environ['HBNB_TYPE_STORAGE'] == "db":
         __tablename__ = "cities"

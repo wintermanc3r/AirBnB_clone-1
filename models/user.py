@@ -4,6 +4,7 @@ from models import *
 from sqlalchemy import Column, Integer, String
 import os
 
+
 class User(BaseModel, Base):
     if os.environ['HBNB_TYPE_STORAGE'] == "db":
         __tablename__ = "users"

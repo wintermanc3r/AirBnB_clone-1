@@ -6,12 +6,18 @@ from sqlalchemy import Column, Integer, String
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import DateTime
 
+
 Base = declarative_base()
+
+
 class BaseModel():
     """The base class for all storage objects in this project"""
     id = Column(String(60), primary_key=True, nullable=False)
-    created_at = Column(DateTime, nullable=False, default=datetime.datetime.now())
-    last_updated = Column(DateTime, default=datetime.datetime.now(), onupdate=datetime.datetime.now())
+    created_at = Column(
+        DateTime, nullable=False, default=datetime.datetime.now())
+    last_updated = Column(
+        DateTime, default=datetime.datetime.now(),
+        onupdate=datetime.datetime.now())
     name = Column(String(128), nullable=False)
 
     def __init__(self, **kwargs):

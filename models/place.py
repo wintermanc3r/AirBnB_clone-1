@@ -3,6 +3,7 @@ from models import *
 from models.base_model import Base
 import os
 
+
 class Place(BaseModel, Base):
     if os.environ['HBNB_TYPE_STORAGE'] == "db":
         __tablename__ = "places"

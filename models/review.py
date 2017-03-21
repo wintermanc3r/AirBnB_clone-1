@@ -5,6 +5,7 @@ from models.base_model import Base
 from sqlalchemy import Column, Integer, String, ForeignKey
 from models import Place, User
 
+
 class Review(BaseModel, Base):
     if os.environ['HBNB_TYPE_STORAGE'] == "db":
         __tablename__ = "reviews"
