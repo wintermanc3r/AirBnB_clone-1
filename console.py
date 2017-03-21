@@ -1,12 +1,11 @@
-#!/usr/bin/python3
-import cmd
+#!/usr/bin/python3import cmd
 from models import *
+import cmd
 
 
 class HBNBCommand(cmd.Cmd):
-    prompt = '(hbnb)'
+    prompt = '(hbnb) '
     storage.reload()
-
     valid_classes = ["BaseModel", "User", "State",
                      "City", "Amenity", "Place", "Review"]
 
@@ -22,7 +21,7 @@ class HBNBCommand(cmd.Cmd):
         print("")
         return True
 
-    def do_create(self, args, **kwargs):
+    def do_create(self, args):
         """
         Creates a model of a given classname.
 
@@ -33,37 +32,23 @@ class HBNBCommand(cmd.Cmd):
         Arguments must contain an "=" and be formatted like so:
         string="hello" float=6.36 int=27
         """
-        args = args.split()
+        args = args.split(' ')
         if len(args) < 1:
             print("** class name missing **")
             return
         if args[0] in HBNBCommand.valid_classes:
-            if len(args) > 1:
-                for x in range(1, len(args)):
-                    if "=" not in args[x]:
-                        print("** invalid parameters **")
-                        return
-            new_obj = eval(args[0])()
+            cname = args[0]
+            del(args[0])
+            kwrg = {}
+            for arg in args:
+                try:
+                    kwrg[arg.split('=')[0]] = arg.split('=')[1]
+                except:
+                    print("** parameter format error **")
+                new_obj = eval(cname)(**kwrg)
             print(new_obj.id)
-            if len(args) > 1:
-                for x in range(1, len(args)):
-                    key = args[x].split("=")[0]
-                    value = args[x].split("=")[1]
-                    try:
-                        if (value[0] == '"' and value[-1] == '"') or (
-                                value[0] == "'" and value[-1] == "'"):
-                            value = str(value[1:-1])
-                        elif '.' in value:
-                            value = float(value)
-                        else:
-                            value = int(value)
-                    except:
-                        """ this will prevent it from saving, not sure
-                        if that's the desired outcome for the project """
-                        print("** invalid parameters **")
-                        return
-                    new_obj.__dict__[key] = value
-            new_obj.save()
+        else:
+            print("** class doesn't exist **")
 
     def do_show(self, args):
         """Usage: show BaseModel 1234-1234-1234"""
@@ -97,12 +82,13 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
             return
         all_objs = storage.all()
-        for objs_id in all_objs.keys():
-            if objs_id == args[1] and args[0] in str(type(all_objs[objs_id])):
-                del all_objs[objs_id]
+        try:
+            if all_objs[args[1]] and args[0] in str(type(all_objs[args[1]])):
+                storage.delete(all_objs[args[1]])
                 storage.save()
                 return
-        print("** no instance found **")
+        except:
+            print("** no instance found **")
 
     def do_all(self, args):
         """Usage: all Basemodel or all"""
