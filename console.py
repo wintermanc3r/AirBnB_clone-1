@@ -2,9 +2,8 @@
 from models import *
 import cmd
 
-
 class HBNBCommand(cmd.Cmd):
-    prompt = '(hbnb) '
+    prompt = '(hbnb {})'.format(storage_type)
     storage.reload()
     valid_classes = ["BaseModel", "User", "State",
                      "City", "Amenity", "Place", "Review"]
@@ -41,8 +40,19 @@ class HBNBCommand(cmd.Cmd):
             del(args[0])
             kwrg = {}
             for arg in args:
+                key = arg.split('=')[0]
+                value = arg.split('=')[1]
                 try:
-                    kwrg[arg.split('=')[0]] = arg.split('=')[1]
+                    if value[0] == '"':
+                        value = str(value)
+                        for char in value:
+                            if char == "_":
+                                char = " "
+                    elif "." in value:
+                        value = float(value)
+                    else:
+                        value = int(value)
+                    kwrg[key] = value
                 except:
                     print("** parameter format error **")
                 new_obj = eval(cname)(**kwrg)

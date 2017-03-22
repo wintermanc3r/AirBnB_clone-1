@@ -1,24 +1,27 @@
 #!/usr/bin/python3
 import datetime
 import uuid
+from models import *
 import models
 from sqlalchemy import Column, Integer, String
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import DateTime
 
-
-Base = declarative_base()
-
+if storage_type == "db":
+    Base = declarative_base()
+else:
+    Base = object
 
 class BaseModel():
     """The base class for all storage objects in this project"""
-    id = Column(String(60), primary_key=True, nullable=False)
-    created_at = Column(
-        DateTime, nullable=False, default=datetime.datetime.now())
-    last_updated = Column(
-        DateTime, default=datetime.datetime.now(),
-        onupdate=datetime.datetime.now())
-    name = Column(String(128), nullable=False)
+    if storage_type == "db":
+        id = Column(String(60), primary_key=True, nullable=False)
+        created_at = Column(
+            DateTime, nullable=False, default=datetime.datetime.now())
+        last_updated = Column(
+            DateTime, default=datetime.datetime.now(),
+            onupdate=datetime.datetime.now())
+        name = Column(String(128), nullable=False)
 
     def __init__(self, **kwargs):
         """initialize class object"""
@@ -47,6 +50,6 @@ class BaseModel():
         if ("updated_at" in dupe):
             dupe["updated_at"] = str(dupe["updated_at"])
         dupe["__class__"] = type(self).__name__
-        if dupe["_sa_instance_state"]:
+        if "_sa_instance_state" in dupe:
             del(dupe["_sa_instance_state"])
         return dupe

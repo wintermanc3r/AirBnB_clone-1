@@ -7,7 +7,7 @@ from models import *
 
 
 class State(BaseModel, Base):
-    if os.environ['HBNB_TYPE_STORAGE'] == "db":
+    if storage_type == "db":
         __tablename__ = "states"
         name = Column(String(128), nullable=False)
         cities = relationship("City", cascade="delete, delete-orphan")
