@@ -85,8 +85,7 @@ class Test_Console(unittest.TestCase):
     def test_destroy_correct(self):
         test_args = {'name': "\"steve\"",
                      'updated_at': datetime(2017, 2, 12, 00, 31, 53, 331997),
-                     'created_at': datetime(2017, 2, 12, 00, 31, 53, 331900)
-        }
+                     'created_at': datetime(2017, 2, 12, 00, 31, 53, 331900)}
         testmodel = State(**test_args)
         testmodel.save()
         self.cli.do_destroy("State {}".format(testmodel.id))
