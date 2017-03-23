@@ -9,7 +9,7 @@ class Test_StateModel(unittest.TestCase):
     """
 
     def setUp(self):
-        self.model = State(**{"name": "Testax"})
+        self.model = State(**{"name": "\"Testax\""})
         self.model.save()
 
     def tearDown(self):

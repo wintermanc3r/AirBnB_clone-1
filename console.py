@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 import cmd
 from models import *
-
+from models import storage
 
 class HBNBCommand(cmd.Cmd):
     prompt = '(hbnb) '
