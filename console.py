@@ -255,5 +255,3 @@ class HBNBCommand(cmd.Cmd):
                 return
         else:
             print("Not a valid command")
-
-
