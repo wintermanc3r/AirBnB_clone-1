@@ -6,6 +6,8 @@ from models import *
 
 if 'HBNB_TYPE_STORAGE' not in os.environ:
     os.environ['HBNB_TYPE_STORAGE'] = ''
+
+
 @unittest.skipIf(os.environ['HBNB_TYPE_STORAGE'] == 'db',
                  "BaseModel not mapped to MySQL db.")
 class Test_FileStorage(unittest.TestCase):
