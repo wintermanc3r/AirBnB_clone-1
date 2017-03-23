@@ -7,8 +7,8 @@ import os
 
 
 class User(BaseModel, Base):
-    if (os.environ['HBNB_MYSQL_ENV'] and
-        os.environ['HBNB_MYSQL_ENV'] == "test"):
+    if os.environ['HBNB_MYSQL_ENV'] \
+       and os.environ['HBNB_MYSQL_ENV'] == "test":
         __tablename__ = "users"
         email = Column(String(128), nullable=False)
         password = Column(String(128), nullable=False)

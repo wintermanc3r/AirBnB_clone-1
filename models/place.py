@@ -7,8 +7,8 @@ import os
 
 
 class Place(BaseModel, Base):
-    if (os.environ["HBNB_TYPE_STORAGE"] and
-        os.environ["HBNB_TYPE_STORAGE"] == "db"):
+    if os.environ["HBNB_TYPE_STORAGE"] \
+       and os.environ["HBNB_TYPE_STORAGE"] == "db":
         __tablename__ = "places"
         city_id = Column(String(60), ForeignKey(City.id), nullable=False)
         user_id = Column(String(60), ForeignKey(User.id), nullable=False)
@@ -38,8 +38,8 @@ class Place(BaseModel, Base):
 
 
 class PlaceAmenity(Base):
-    if (os.environ["HBNB_TYPE_STORAGE"] and
-        os.environ["HBNB_TYPE_STORAGE"] == "db"):
+    if os.environ["HBNB_TYPE_STORAGE"] \
+       and os.environ["HBNB_TYPE_STORAGE"] == "db":
         __tablename__ = "place_amenity"
         place_id = Column(String(60), ForeignKey(Place.id),
                           primary_key=True, nullable=False)

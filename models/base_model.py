@@ -15,8 +15,8 @@ else:
 
 class BaseModel():
     """The base class for all storage objects in this project"""
-    if (os.environ["HBNB_TYPE_STORAGE"] and
-        os.environ["HBNB_TYPE_STORAGE"] == "db"):
+    if os.environ["HBNB_TYPE_STORAGE"] \
+       and os.environ["HBNB_TYPE_STORAGE"] == "db":
         id = Column(String(60), primary_key=True, nullable=False)
         created_at = Column(
             DateTime, nullable=False, default=datetime.datetime.now())
