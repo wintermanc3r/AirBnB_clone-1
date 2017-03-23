@@ -1,6 +1,7 @@
 import unittest
 from datetime import datetime
 from models import *
+from models import storage
 
 
 class Test_BaseModel(unittest.TestCase):
@@ -8,9 +9,10 @@ class Test_BaseModel(unittest.TestCase):
     Test the base model class
     """
 
+    @unittest.skipIf(os.environ['HBNB_TYPE_STORAGE'] == 'db',
+                     "BaseModel not mapped to MySQL db.")
     def setUp(self):
         self.model1 = BaseModel()
-
         test_args = {'created_at': datetime(2017, 2, 10, 2, 6, 55, 258849),
                      'updated_at': datetime(2017, 2, 10, 2, 6, 55, 258966),
                      'id': '46458416-e5d5-4985-aa48-a2b369d03d2a',

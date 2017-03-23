@@ -3,8 +3,8 @@ import sys
 import os
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import *
-from models import *
 from models.base_model import Base
+
 
 class DBStorage:
     __engine = None
@@ -17,13 +17,15 @@ class DBStorage:
         host = os.environ['HBNB_MYSQL_HOST']
         self.__engine = create_engine('mysql+mysqldb://{}:{}@{}/{}'
                                       .format(uname, upass, host, dbname))
-        self.__Session = sessionmaker()
-        self.__Session.configure(bind=self.__engine)
-        self.__session = self.__Session()
+        self.Session = sessionmaker(bind=self.__engine)
+        self.meta = MetaData()
+        self.reload()
+        if (os.environ['HBNB_MYSQL_ENV'] and
+            os.environ['HBNB_MYSQL_ENV'] == "test"):
+            self.meta.drop_all(self.__engine)
 
     def all(self, cls=None):
         retval = {}
-        print(cls)
         if cls is not None:
             for instance in self.__session.query(cls):
                 retval.update(instance.id, instance)
@@ -46,5 +48,5 @@ class DBStorage:
             self.__session.delete(obj)
 
     def reload(self):
-        Base.metadata.create_all(self.__engine)
-        self.__session = self.__Session()
+        self.meta.create_all(self.__engine)
+        self.__session = self.Session()
