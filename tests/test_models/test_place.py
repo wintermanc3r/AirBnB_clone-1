@@ -9,7 +9,12 @@ class Test_PlaceModel(unittest.TestCase):
     """
 
     def setUp(self):
-        self.model = Place()
+        self.state = State(**{"name": "Testax"})
+        self.city = City(**{"name": "TestCity", "state_id": self.state.id})
+        self.user = User(**{"name": "Steve", "email": "example@example.com",
+                            "password": "password"})
+        self.model = Place(**{"name": "Hotel", "city_id": self.city.id,
+                              "user_id": self.user.id})
         self.model.save()
 
     def test_var_initialization(self):
@@ -24,17 +29,18 @@ class Test_PlaceModel(unittest.TestCase):
         self.assertTrue(hasattr(self.model, "latitude"))
         self.assertTrue(hasattr(self.model, "longitude"))
         self.assertTrue(hasattr(self.model, "amenities"))
-        self.assertEqual(self.model.city_id, "")
-        self.assertEqual(self.model.user_id, "")
-        self.assertEqual(self.model.name, "")
-        self.assertEqual(self.model.description, "")
+        self.assertEqual(self.model.city_id, self.city.id)
+        self.assertEqual(self.model.user_id, self.user.id)
+        self.assertEqual(self.model.name, "Hotel")
+        self.assertEqual(self.model.description, "" or None)
         self.assertEqual(self.model.number_rooms, 0)
         self.assertEqual(self.model.number_bathrooms, 0)
         self.assertEqual(self.model.max_guest, 0)
         self.assertEqual(self.model.price_by_night, 0)
-        self.assertEqual(self.model.latitude, 0.0)
-        self.assertEqual(self.model.longitude, 0.0)
-        self.assertEqual(self.model.amenities, [''])
+        self.assertEqual(self.model.latitude, 0.0 or None)
+        self.assertEqual(self.model.longitude, 0.0 or None)
+        self.assertTrue(self.model.amenities == [''] or
+                        self.model.amenities == [])
 
 
 if __name__ == "__main__":

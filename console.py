@@ -2,6 +2,7 @@
 from models import *
 import cmd
 
+
 class HBNBCommand(cmd.Cmd):
     prompt = '(hbnb {}) '.format(storage_type)
     storage.reload()
@@ -55,7 +56,6 @@ class HBNBCommand(cmd.Cmd):
                     kwrg[key] = value
                 except:
                     print("** parameter format error **")
-            print(storage)
             new_obj = eval(cname)(**kwrg)
             print(new_obj.id)
         else:

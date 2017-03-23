@@ -9,12 +9,12 @@ class Test_AmenityModel(unittest.TestCase):
     """
 
     def setUp(self):
-        self.model = Amenity()
+        self.model = Amenity(**{"name": "steve"})
         self.model.save()
 
     def test_var_initialization(self):
         self.assertTrue(hasattr(self.model, "name"))
-        self.assertEqual(self.model.name, "")
+        self.assertEqual(self.model.name, "steve")
 
 
 if __name__ == "__main__":

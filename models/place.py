@@ -5,8 +5,10 @@ from sqlalchemy import Column, Integer, String, Float, ForeignKey
 from sqlalchemy.orm import relationship
 import os
 
+
 class Place(BaseModel, Base):
-    if storage_type == "db":
+    if (os.environ["HBNB_TYPE_STORAGE"] and
+        os.environ["HBNB_TYPE_STORAGE"] == "db"):
         __tablename__ = "places"
         city_id = Column(String(60), ForeignKey(City.id), nullable=False)
         user_id = Column(String(60), ForeignKey(User.id), nullable=False)
@@ -34,12 +36,15 @@ class Place(BaseModel, Base):
         longitude = 0.0
         amenities = [""]
 
-class PlaceAmenity(Base):
-    if storage_type == "db":
-        __tablename__ = "place_amenity"
-        place_id = Column(String(60), ForeignKey(Place.id), primary_key=True, nullable=False)
-        amenity_id = Column(String(60), ForeignKey(Amenity.id), primary_key=True, nullable=False)
 
+class PlaceAmenity(Base):
+    if (os.environ["HBNB_TYPE_STORAGE"] and
+        os.environ["HBNB_TYPE_STORAGE"] == "db"):
+        __tablename__ = "place_amenity"
+        place_id = Column(String(60), ForeignKey(Place.id),
+                          primary_key=True, nullable=False)
+        amenity_id = Column(String(60), ForeignKey(Amenity.id),
+                            primary_key=True, nullable=False)
 
     def __init__(self, *args, **kwargs):
         super().__init__()

@@ -6,14 +6,17 @@ from sqlalchemy import Column, Integer, String
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import DateTime
 
+
 if os.environ["HBNB_TYPE_STORAGE"] and os.environ["HBNB_TYPE_STORAGE"] == "db":
     Base = declarative_base()
 else:
     Base = object
 
+
 class BaseModel():
     """The base class for all storage objects in this project"""
-    if os.environ["HBNB_TYPE_STORAGE"] and os.environ["HBNB_TYPE_STORAGE"] == "db":
+    if (os.environ["HBNB_TYPE_STORAGE"] and
+        os.environ["HBNB_TYPE_STORAGE"] == "db"):
         id = Column(String(60), primary_key=True, nullable=False)
         created_at = Column(
             DateTime, nullable=False, default=datetime.datetime.now())
@@ -22,13 +25,13 @@ class BaseModel():
             onupdate=datetime.datetime.now())
         name = Column(String(128), nullable=False)
 
-    def __init__(self, **kwargs):
+    def __init__(self, *args, **kwargs):
         """initialize class object"""
         self.created_at = datetime.datetime.now()
         self.id = str(uuid.uuid4())
-        print(kwargs)
-        for k, v in kwargs.items():
-            setattr(self, k, v)
+        if kwargs:
+            for k, v in kwargs.items():
+                setattr(self, k, v)
         self.save()
 
     def save(self):

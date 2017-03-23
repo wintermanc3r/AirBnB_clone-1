@@ -1,5 +1,12 @@
 #!/usr/bin/python3
 import os
+from models.base_model import BaseModel
+from models.user import User
+from models.amenity import Amenity
+from models.city import City
+from models.place import Place
+from models.state import State
+from models.review import Review
 
 if os.environ["HBNB_TYPE_STORAGE"] and os.environ["HBNB_TYPE_STORAGE"] == "db":
     from models.engine import db_storage
@@ -11,12 +18,3 @@ else:
     storage = file_storage.FileStorage()
     storage.reload()
     storage_type = "file"
-
-print(storage)
-from models.base_model import BaseModel
-from models.user import User
-from models.amenity import Amenity
-from models.city import City
-from models.place import Place
-from models.state import State
-from models.review import Review

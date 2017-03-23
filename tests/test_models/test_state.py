@@ -9,12 +9,12 @@ class Test_StateModel(unittest.TestCase):
     """
 
     def setUp(self):
-        self.model = State()
+        self.model = State(**{"name": "Testax"})
         self.model.save()
 
     def test_var_initialization(self):
         self.assertTrue(hasattr(self.model, "name"))
-        self.assertEqual(self.model.name, "")
+        self.assertEqual(self.model.name, "Testax")
 
 
 if __name__ == "__main__":
