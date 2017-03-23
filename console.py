@@ -1,12 +1,10 @@
 #!/usr/bin/python3
 import cmd
 from models import *
-import cmd
 
 
 class HBNBCommand(cmd.Cmd):
     prompt = '(hbnb) '
-    storage.reload()
     valid_classes = ["BaseModel", "User", "State",
                      "City", "Amenity", "Place", "Review"]
 
