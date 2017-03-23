@@ -1,24 +1,23 @@
 #!/usr/bin/python3
+import os
 import datetime
 import uuid
-from models import *
-import models
 from sqlalchemy import Column, Integer, String
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import DateTime
 
-if storage_type == "db":
+if os.environ["HBNB_TYPE_STORAGE"] and os.environ["HBNB_TYPE_STORAGE"] == "db":
     Base = declarative_base()
 else:
     Base = object
 
 class BaseModel():
     """The base class for all storage objects in this project"""
-    if storage_type == "db":
+    if os.environ["HBNB_TYPE_STORAGE"] and os.environ["HBNB_TYPE_STORAGE"] == "db":
         id = Column(String(60), primary_key=True, nullable=False)
         created_at = Column(
             DateTime, nullable=False, default=datetime.datetime.now())
-        last_updated = Column(
+        updated_at = Column(
             DateTime, default=datetime.datetime.now(),
             onupdate=datetime.datetime.now())
         name = Column(String(128), nullable=False)
@@ -35,8 +34,9 @@ class BaseModel():
     def save(self):
         """method to update self"""
         self.updated_at = datetime.datetime.now()
-        models.storage.new(self)
-        models.storage.save()
+        from models import storage
+        storage.new(self)
+        storage.save()
 
     def __str__(self):
         """edit string representation"""

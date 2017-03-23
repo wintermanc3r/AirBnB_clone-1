@@ -3,7 +3,7 @@ from models import *
 import cmd
 
 class HBNBCommand(cmd.Cmd):
-    prompt = '(hbnb {})'.format(storage_type)
+    prompt = '(hbnb {}) '.format(storage_type)
     storage.reload()
     valid_classes = ["BaseModel", "User", "State",
                      "City", "Amenity", "Place", "Review"]
@@ -37,17 +37,17 @@ class HBNBCommand(cmd.Cmd):
             return
         if args[0] in HBNBCommand.valid_classes:
             cname = args[0]
-            del(args[0])
             kwrg = {}
-            for arg in args:
+            for arg in args[1:]:
                 key = arg.split('=')[0]
                 value = arg.split('=')[1]
                 try:
-                    if value[0] == '"':
+                    if value[0] == '"' and value[-1] == '"':
                         value = str(value)
                         for char in value:
                             if char == "_":
                                 char = " "
+                        value = value[1:-1]
                     elif "." in value:
                         value = float(value)
                     else:
@@ -55,7 +55,8 @@ class HBNBCommand(cmd.Cmd):
                     kwrg[key] = value
                 except:
                     print("** parameter format error **")
-                new_obj = eval(cname)(**kwrg)
+            print(storage)
+            new_obj = eval(cname)(**kwrg)
             print(new_obj.id)
         else:
             print("** class doesn't exist **")

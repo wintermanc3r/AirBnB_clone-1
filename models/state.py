@@ -10,7 +10,6 @@ class State(BaseModel, Base):
     if storage_type == "db":
         __tablename__ = "states"
         name = Column(String(128), nullable=False)
-        cities = relationship("City", cascade="delete, delete-orphan")
     else:
         name = ""
 

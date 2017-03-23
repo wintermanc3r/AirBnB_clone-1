@@ -11,6 +11,7 @@ else:
     storage = file_storage.FileStorage()
     storage.reload()
     storage_type = "file"
+
 print(storage)
 from models.base_model import BaseModel
 from models.user import User

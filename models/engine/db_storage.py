@@ -2,10 +2,9 @@
 import sys
 import os
 from sqlalchemy.orm import sessionmaker
-from sqlalchemy import create_engine
+from sqlalchemy import *
+from models import *
 from models.base_model import Base
-from sqlalchemy import inspect
-
 
 class DBStorage:
     __engine = None
@@ -20,7 +19,6 @@ class DBStorage:
                                       .format(uname, upass, host, dbname))
         self.__Session = sessionmaker()
         self.__Session.configure(bind=self.__engine)
-        Base.metadata.create_all(self.__engine)
         self.__session = self.__Session()
 
     def all(self, cls=None):
