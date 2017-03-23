@@ -4,7 +4,7 @@ import cmd
 
 
 class HBNBCommand(cmd.Cmd):
-    prompt = '(hbnb {}) '.format(storage_type)
+    prompt = '(hbnb) '
     storage.reload()
     valid_classes = ["BaseModel", "User", "State",
                      "City", "Amenity", "Place", "Review"]
@@ -256,5 +256,3 @@ class HBNBCommand(cmd.Cmd):
             print("Not a valid command")
 
 
-if __name__ == '__main__':
-    HBNBCommand().cmdloop()
