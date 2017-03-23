@@ -22,6 +22,10 @@ class Test_BaseModel(unittest.TestCase):
         self.model2 = BaseModel(**test_args)
         self.model2.save()
 
+    def tearDown(self):
+        self.model1.delete()
+        self.model2.delete()
+
     def test_instantiation(self):
         self.assertIsInstance(self.model1, BaseModel)
         self.assertTrue(hasattr(self.model1, "created_at"))

@@ -27,8 +27,7 @@ class Test_FileStorage(unittest.TestCase):
 
     def tearDown(self):
         import os
-        if os.path.isfile("file.json"):
-            os.remove('file.json')
+        self.model.delete()
 
     def test_all(self):
         self.assertEqual(len(self.store.all()), self.test_len)
@@ -38,6 +37,7 @@ class Test_FileStorage(unittest.TestCase):
         a = BaseModel()
         a.save()
         self.assertEqual(len(self.store.all()), self.test_len + 1)
+        a.delete()
 
     def test_save(self):
         self.test_len = len(self.store.all())
@@ -47,6 +47,8 @@ class Test_FileStorage(unittest.TestCase):
         b = User()
         b.save()
         self.assertEqual(len(self.store.all()), self.test_len + 2)
+        a.delete()
+        b.delete()
 
     def test_reload(self):
         pass

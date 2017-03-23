@@ -13,6 +13,10 @@ class Test_CityModel(unittest.TestCase):
         self.model = City(**{"name": "city", "state_id": self.state.id})
         self.model.save()
 
+    def tearDown(self):
+        self.state.delete()
+        self.model.delete()
+
     def test_var_initialization(self):
         self.assertTrue(hasattr(self.model, "name"))
         self.assertTrue(hasattr(self.model, "state_id"))

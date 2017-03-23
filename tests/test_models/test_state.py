@@ -12,6 +12,9 @@ class Test_StateModel(unittest.TestCase):
         self.model = State(**{"name": "Testax"})
         self.model.save()
 
+    def tearDown(self):
+        self.model.delete()
+
     def test_var_initialization(self):
         self.assertTrue(hasattr(self.model, "name"))
         self.assertEqual(self.model.name, "Testax")

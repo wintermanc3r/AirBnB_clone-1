@@ -12,6 +12,9 @@ class Test_AmenityModel(unittest.TestCase):
         self.model = Amenity(**{"name": "steve"})
         self.model.save()
 
+    def tearDown(self):
+        self.model.delete()
+
     def test_var_initialization(self):
         self.assertTrue(hasattr(self.model, "name"))
         self.assertEqual(self.model.name, "steve")

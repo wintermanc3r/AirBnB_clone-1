@@ -14,6 +14,9 @@ class Test_UserModel(unittest.TestCase):
                              "last_name": "bob"})
         self.model.save()
 
+    def tearDown(self):
+        self.model.delete()
+
     def test_var_initialization(self):
         self.assertTrue(hasattr(self.model, "email"))
         self.assertTrue(hasattr(self.model, "password"))

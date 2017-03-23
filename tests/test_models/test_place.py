@@ -17,6 +17,13 @@ class Test_PlaceModel(unittest.TestCase):
                               "user_id": self.user.id})
         self.model.save()
 
+    def tearDown(self):
+        self.model.delete()
+        self.state.delete()
+        self.city.delete()
+        self.user.delete()
+        storage.reload()
+
     def test_var_initialization(self):
         self.assertTrue(hasattr(self.model, "city_id"))
         self.assertTrue(hasattr(self.model, "user_id"))
