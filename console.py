@@ -41,22 +41,12 @@ class HBNBCommand(cmd.Cmd):
             cname = args[0]
             kwrg = {}
             for arg in args[1:]:
-                key = arg.split('=')[0]
-                value = arg.split('=')[1]
                 try:
-                    if value[0] == '"' and value[-1] == '"':
-                        value = str(value)
-                        for char in value:
-                            if char == "_":
-                                char = " "
-                        value = value[1:-1]
-                    elif "." in value:
-                        value = float(value)
-                    else:
-                        value = int(value)
+                    key = arg.split('=')[0]
+                    value = arg.split('=')[1]
                     kwrg[key] = value
                 except:
-                    print("** parameter format error **")
+                    continue
             new_obj = eval(cname)(**kwrg)
             print(new_obj.id)
         else:
@@ -255,3 +245,6 @@ class HBNBCommand(cmd.Cmd):
                 return
         else:
             print("Not a valid command")
+
+if __name__ == '__main__':
+        HBNBCommand().cmdloop()

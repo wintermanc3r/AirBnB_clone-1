@@ -31,8 +31,22 @@ class BaseModel():
         self.created_at = datetime.datetime.now()
         self.id = str(uuid.uuid4())
         if kwargs:
-            for k, v in kwargs.items():
-                setattr(self, k, v)
+            print(kwargs)
+            for key, value in kwargs.items():
+                try:
+                    if value[0] == '"' and value[-1] == '"':
+                        value = str(value)
+                        value = value.replace("_", " ")
+                        value = value[1:-1]
+                        print("VALUE: " + value)
+                    elif "." in value:
+                        value = float(value)
+                    else:
+                        value = int(value)
+                    setattr(self, key, value)
+                except Exception as e:
+                    print(e)
+                    continue
         self.save()
 
     def save(self):
