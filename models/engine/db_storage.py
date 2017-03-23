@@ -20,7 +20,7 @@ class DBStorage:
         self.Session = sessionmaker(bind=self.__engine)
         self.meta = MetaData()
         self.reload()
-        if os.environ['HBNB_MYSQL_ENV'] and \
+        if 'HBNB_MYSQL_ENV' in os.environ and \
            os.environ['HBNB_MYSQL_ENV'] == "test":
             self.meta.drop_all(self.__engine)
 
