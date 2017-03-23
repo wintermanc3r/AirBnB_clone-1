@@ -17,7 +17,8 @@ class Test_ReviewModel(unittest.TestCase):
         self.place = Place(**{"name": "\"Hotel\"", "city_id": self.city.id,
                               "user_id": "\"{}\"".format(self.user.id)})
         self.model = Review(**{"name": "\"review\"", "user_id": self.user.id,
-                               "place_id": "\"{}\"".format(self.place.id), "text": "\"text\""})
+                               "place_id": "\"{}\"".format(self.place.id),
+                               "text": "\"text\""})
         self.model.save()
 
     def tearDown(self):
