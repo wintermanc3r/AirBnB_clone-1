@@ -1,4 +1,5 @@
-#!/usr/bin/python3import cmd
+#!/usr/bin/python3
+import cmd
 from models import *
 import cmd
 
