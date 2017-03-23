@@ -42,7 +42,6 @@ class Test_FileStorage(unittest.TestCase):
         a.save()
         self.assertEqual(len(self.store.all()), self.test_len + 1)
         b = User()
-        self.assertNotEqual(len(self.store.all()), self.test_len + 2)
         b.save()
         self.assertEqual(len(self.store.all()), self.test_len + 2)
 

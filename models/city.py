@@ -7,7 +7,7 @@ from sqlalchemy import Column, Integer, String, ForeignKey
 
 
 class City(BaseModel, Base):
-    if os.environ["HBNB_TYPE_STORAGE"] \
+    if "HBNB_TYPE_STORAGE" in os.environ.keys() \
        and os.environ["HBNB_TYPE_STORAGE"] == "db":
         __tablename__ = "cities"
         name = Column(String(128), nullable=False)

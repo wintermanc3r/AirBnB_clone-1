@@ -8,7 +8,8 @@ from models.place import Place
 from models.state import State
 from models.review import Review
 
-if os.environ["HBNB_TYPE_STORAGE"] and os.environ["HBNB_TYPE_STORAGE"] == "db":
+if "HBNB_TYPE_STORAGE" in os.environ \
+   and os.environ["HBNB_TYPE_STORAGE"] == "db":
     from models.engine import db_storage
     storage_type = "db"
     storage = db_storage.DBStorage()

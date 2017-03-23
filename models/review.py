@@ -7,7 +7,8 @@ from models import Place, User
 
 
 class Review(BaseModel, Base):
-    if os.environ['HBNB_TYPE_STORAGE'] == "db":
+    if 'HBNB_TYPE_STORAGE' in os.environ \
+       and os.environ['HBNB_TYPE_STORAGE'] == "db":
         __tablename__ = "reviews"
         text = Column(String(1024), nullable=False)
         place_id = Column(String(60), ForeignKey(Place.id), nullable=False)

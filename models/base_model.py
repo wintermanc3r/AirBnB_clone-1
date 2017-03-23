@@ -7,7 +7,8 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import DateTime
 
 
-if os.environ["HBNB_TYPE_STORAGE"] and os.environ["HBNB_TYPE_STORAGE"] == "db":
+if ("HBNB_TYPE_STORAGE" in os.environ and
+   os.environ["HBNB_TYPE_STORAGE"] == "db"):
     Base = declarative_base()
 else:
     Base = object
@@ -15,7 +16,7 @@ else:
 
 class BaseModel():
     """The base class for all storage objects in this project"""
-    if os.environ["HBNB_TYPE_STORAGE"] \
+    if "HBNB_TYPE_STORAGE" in os.environ \
        and os.environ["HBNB_TYPE_STORAGE"] == "db":
         id = Column(String(60), primary_key=True, nullable=False)
         created_at = Column(

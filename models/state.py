@@ -7,7 +7,7 @@ from models import *
 
 
 class State(BaseModel, Base):
-    if os.environ["HBNB_TYPE_STORAGE"] \
+    if "HBNB_TYPE_STORAGE" in os.environ \
        and os.environ["HBNB_TYPE_STORAGE"] == "db":
         __tablename__ = "states"
         name = Column(String(128), nullable=False)

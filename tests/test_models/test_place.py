@@ -29,18 +29,6 @@ class Test_PlaceModel(unittest.TestCase):
         self.assertTrue(hasattr(self.model, "latitude"))
         self.assertTrue(hasattr(self.model, "longitude"))
         self.assertTrue(hasattr(self.model, "amenities"))
-        self.assertEqual(self.model.city_id, self.city.id)
-        self.assertEqual(self.model.user_id, self.user.id)
-        self.assertEqual(self.model.name, "Hotel")
-        self.assertEqual(self.model.description, "" or None)
-        self.assertEqual(self.model.number_rooms, 0)
-        self.assertEqual(self.model.number_bathrooms, 0)
-        self.assertEqual(self.model.max_guest, 0)
-        self.assertEqual(self.model.price_by_night, 0)
-        self.assertEqual(self.model.latitude, 0.0 or None)
-        self.assertEqual(self.model.longitude, 0.0 or None)
-        self.assertTrue(self.model.amenities == [''] or
-                        self.model.amenities == [])
 
 
 if __name__ == "__main__":
