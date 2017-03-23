@@ -31,7 +31,7 @@ class Test_Console(unittest.TestCase):
         self.model.save()
 
     def tearDown(self):
-        self.cli.do_destroy("State {}".format(self.model.id))
+        self.model.delete()
 
     def test_quit(self):
         with self.assertRaises(SystemExit):
@@ -39,7 +39,7 @@ class Test_Console(unittest.TestCase):
 
     def test_show_correct(self):
         with captured_output() as (out, err):
-            self.cli.do_show("State d3da85f2-499c-43cb-b33d-3d7935bc808c")
+            self.cli.do_show("State {}".format(self.model.id))
         output = out.getvalue().strip()
         self.assertFalse("2017, 2, 11, 23, 48, 34, 339879" in output)
 
@@ -76,6 +76,7 @@ class Test_Console(unittest.TestCase):
         with captured_output() as (out, err):
             self.cli.do_create("State name=\"steve\"")
         output = out.getvalue().strip()
+        self.cli.do_destroy("State {}".format(output))
 
         with captured_output() as (out, err):
             self.cli.do_show("State {}".format(output))
@@ -129,14 +130,15 @@ class Test_Console(unittest.TestCase):
             self.cli.do_all("")
         output = out.getvalue().strip()
         self.assertTrue(testmodel.id in output)
-        self.assertFalse("123-456-abc" in output)
+        self.assertTrue(self.model.id in output)
+        testmodel.delete()
 
     def test_all_correct_with_class(self):
         with captured_output() as (out, err):
-            self.cli.do_all("BaseModel")
+            self.cli.do_all("State")
         output = out.getvalue().strip()
         self.assertTrue(len(output) > 0)
-        self.assertFalse("d3da85f2-499c-43cb-b33d-3d7935bc808c" in output)
+        self.assertTrue(self.model.id in output)
 
     def test_all_error_invalid_class(self):
         with captured_output() as (out, err):

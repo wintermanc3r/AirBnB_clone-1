@@ -10,7 +10,8 @@ class Test_UserModel(unittest.TestCase):
 
     def setUp(self):
         self.model = User(**{"name": "Steve", "email": "example@example.com",
-                             "password": "hello"})
+                             "password": "hello", "first_name": "steve",
+                             "last_name": "bob"})
         self.model.save()
 
     def test_var_initialization(self):
@@ -20,8 +21,8 @@ class Test_UserModel(unittest.TestCase):
         self.assertTrue(hasattr(self.model, "last_name"))
         self.assertEqual(self.model.email, "example@example.com")
         self.assertEqual(self.model.password, "hello")
-        self.assertEqual(self.model.first_name, "")
-        self.assertEqual(self.model.last_name, "")
+        self.assertEqual(self.model.first_name, "steve")
+        self.assertEqual(self.model.last_name, "bob")
 
 
 if __name__ == "__main__":

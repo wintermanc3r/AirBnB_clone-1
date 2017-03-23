@@ -57,3 +57,7 @@ class BaseModel():
         if "_sa_instance_state" in dupe:
             del(dupe["_sa_instance_state"])
         return dupe
+
+    def delete(self):
+        from models import storage
+        storage.delete(self)
