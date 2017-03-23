@@ -26,7 +26,7 @@ class Test_Console(unittest.TestCase):
         self.cli = HBNBCommand()
         test_args = {'updated_at': datetime(2017, 2, 11, 23, 48, 34, 339879),
                      'created_at': datetime(2017, 2, 11, 23, 48, 34, 339743),
-                     'name': 'Ace'}
+                     'name': '\"Ace\"'}
         self.model = State(**test_args)
         self.model.save()
 
@@ -83,9 +83,10 @@ class Test_Console(unittest.TestCase):
         output2 = out.getvalue().strip()
 
     def test_destroy_correct(self):
-        test_args = {'name': 'steve',
+        test_args = {'name': "\"steve\"",
                      'updated_at': datetime(2017, 2, 12, 00, 31, 53, 331997),
-                     'created_at': datetime(2017, 2, 12, 00, 31, 53, 331900)}
+                     'created_at': datetime(2017, 2, 12, 00, 31, 53, 331900)
+        }
         testmodel = State(**test_args)
         testmodel.save()
         self.cli.do_destroy("State {}".format(testmodel.id))
@@ -120,7 +121,7 @@ class Test_Console(unittest.TestCase):
         self.assertEqual(output, "** no instance found **")
 
     def test_all_correct(self):
-        test_args = {'name': 'steve',
+        test_args = {'name': '"steve"',
                      'updated_at': datetime(2017, 2, 12, 00, 31, 53, 331997),
                      'created_at': datetime(2017, 2, 12, 00, 31, 53, 331900),
                      }
