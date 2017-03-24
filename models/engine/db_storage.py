@@ -4,7 +4,12 @@ import os
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import *
 from models.base_model import Base
-
+from models.user import User
+from models.amenity import Amenity
+from models.city import City
+from models.place import Place
+from models.review import Review
+from models.state import State
 
 class DBStorage:
     __engine = None
@@ -21,10 +26,15 @@ class DBStorage:
            os.environ['HBNB_MYSQL_ENV'] == "test":
             Base.metadata.drop_all(self.__engine)
 
+        self.__classes = {"User": User,
+                          "Amenity": Amenity, "City": City,
+                          "Place": Place, "Review": Review,
+                          "State": State}
+
     def all(self, cls=None):
         retval = {}
-        if cls is not None:
-            for instance in self.__session.query(cls):
+        if cls:
+            for instance in self.__session.query(self.__classes[cls]):
                 retval.update(instance.id, instance)
             return (retval)
         else:
