@@ -46,6 +46,5 @@ class DBStorage:
             self.__session.delete(obj)
 
     def reload(self):
-        print("Reloading")
         Base.metadata.create_all(self.__engine)
         self.__session = self.Session()
