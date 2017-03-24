@@ -9,8 +9,8 @@ class Test_CityModel(unittest.TestCase):
     """
 
     def setUp(self):
-        self.state = State(**{"name": "\"Testax\""})
-        self.model = City(**{"name": "\"city\"", "state_id": self.state.id})
+        self.state = State(**{"name": "Testax"})
+        self.model = City(**{"name": "city", "state_id": self.state.id})
         self.model.save()
 
     def tearDown(self):

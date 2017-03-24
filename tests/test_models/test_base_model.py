@@ -2,7 +2,7 @@ import unittest
 from datetime import datetime
 from models import *
 from models import storage
-
+import os
 
 if 'HBNB_TYPE_STORAGE' not in os.environ:
     os.environ['HBNB_TYPE_STORAGE'] = ''

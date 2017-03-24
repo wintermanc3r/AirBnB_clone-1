@@ -9,7 +9,7 @@ class Test_AmenityModel(unittest.TestCase):
     """
 
     def setUp(self):
-        self.model = Amenity(**{"name": "\"steve\""})
+        self.model = Amenity(**{"name": "steve"})
         self.model.save()
 
     def tearDown(self):

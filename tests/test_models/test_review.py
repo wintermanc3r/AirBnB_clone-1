@@ -9,16 +9,16 @@ class Test_ReviewModel(unittest.TestCase):
     """
 
     def setUp(self):
-        self.state = State(**{"name": "\"Testax\""})
-        self.city = City(**{"name": "\"TestCity\"", "state_id": self.state.id})
-        self.user = User(**{"name": "\"Steve\"",
-                            "email": "\"example@example.com\"",
-                            "password": "\"password\""})
-        self.place = Place(**{"name": "\"Hotel\"", "city_id": self.city.id,
-                              "user_id": "\"{}\"".format(self.user.id)})
-        self.model = Review(**{"name": "\"review\"", "user_id": self.user.id,
-                               "place_id": "\"{}\"".format(self.place.id),
-                               "text": "\"text\""})
+        self.state = State(**{"name": "Testax"})
+        self.city = City(**{"name": "TestCity", "state_id": self.state.id})
+        self.user = User(**{"name": "Steve",
+                            "email": "example@example.com",
+                            "password": "password"})
+        self.place = Place(**{"name": "Hotel", "city_id": self.city.id,
+                              "user_id": "{}".format(self.user.id)})
+        self.model = Review(**{"name": "review", "user_id": self.user.id,
+                               "place_id": "{}".format(self.place.id),
+                               "text": "text"})
         self.model.save()
 
     def tearDown(self):

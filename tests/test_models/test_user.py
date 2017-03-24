@@ -9,11 +9,11 @@ class Test_UserModel(unittest.TestCase):
     """
 
     def setUp(self):
-        self.model = User(**{"name": "\"Steve\"",
-                             "email": "\"example@example.com\"",
-                             "password": "\"hello\"",
-                             "first_name": "\"steve\"",
-                             "last_name": "\"bob\""})
+        self.model = User(**{"name": "Steve",
+                             "email": "example@example.com",
+                             "password": "hello",
+                             "first_name": "steve",
+                             "last_name": "bob"})
         self.model.save()
 
     def tearDown(self):

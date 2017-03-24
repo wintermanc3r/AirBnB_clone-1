@@ -43,6 +43,15 @@ class HBNBCommand(cmd.Cmd):
                 try:
                     key = arg.split('=')[0]
                     value = arg.split('=')[1]
+                    if value[0] == '"' and value[-1] == '"':
+                        value = str(value)
+                        value = value.replace("_", " ")
+                        value = value[1:-1]
+                    elif "." in value:
+                        value = float(value)
+                    else:
+                        value = int(value)
+                    setattr(self, key, value)
                     kwrg[key] = value
                 except:
                     continue

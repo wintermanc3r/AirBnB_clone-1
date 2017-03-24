@@ -19,9 +19,9 @@ class Test_PlaceModel(unittest.TestCase):
 
     def tearDown(self):
         self.model.delete()
-        self.state.delete()
-        self.city.delete()
         self.user.delete()
+        self.city.delete()
+        self.state.delete()
         storage.reload()
 
     def test_var_initialization(self):
