@@ -23,8 +23,8 @@ class BaseModel():
             DateTime, nullable=False, default=datetime.datetime.now())
         updated_at = Column(
             DateTime, default=datetime.datetime.now(),
-            onupdate=datetime.datetime.now())
-        name = Column(String(128), nullable=False)
+            onupdate=datetime.datetime.now(),
+            nullable=False)
 
     def __init__(self, *args, **kwargs):
         """initialize class object"""
