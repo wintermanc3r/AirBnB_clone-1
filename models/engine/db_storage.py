@@ -17,7 +17,6 @@ class DBStorage:
         host = os.environ['HBNB_MYSQL_HOST']
         self.__engine = create_engine('mysql+mysqldb://{}:{}@{}/{}'
                                       .format(uname, upass, host, dbname))
-        self.Session = sessionmaker(bind=self.__engine)
         if 'HBNB_MYSQL_ENV' in os.environ and \
            os.environ['HBNB_MYSQL_ENV'] == "test":
             Base.metadata.drop_all(self.__engine)
@@ -46,5 +45,6 @@ class DBStorage:
             self.__session.delete(obj)
 
     def reload(self):
+        Session = sessionmaker(bind=self.__engine)
+        self.__session = Session()
         Base.metadata.create_all(self.__engine)
-        self.__session = self.Session()
