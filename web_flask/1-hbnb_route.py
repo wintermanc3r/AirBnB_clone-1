@@ -13,7 +13,7 @@ def main():
     """
     Default route.
     """
-    return "Hello HBNB!"
+    return "Hello HBNB"
 
 
 @app.route("/hbnb")
@@ -21,7 +21,7 @@ def hbnb():
     """
     hbnb directory
     """
-    return "HBNB!"
+    return "HBNB"
 
 
 if __name__ == "__main__":
