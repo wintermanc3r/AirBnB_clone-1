@@ -4,9 +4,10 @@ Super simple Flask app.
 """
 from flask import Flask
 from flask import abort, render_template
+from models import storage
 
 app = Flask(__name__)
-from models import storage
+
 
 @app.teardown_appcontext
 def teardown(exception):
@@ -85,7 +86,6 @@ def number_odd_or_even_template(n):
         abort(404)
 
 
-
 @app.route("/states_list")
 def states_list():
     return render_template('7-states_list.html', states=storage.all('State'))
@@ -98,7 +98,6 @@ def cities_by_states():
     else:
         print("DB")
     return render_template('7-states_list.html', states=storage.all('State'))
-
 
 
 if __name__ == "__main__":
