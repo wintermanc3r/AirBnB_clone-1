@@ -16,7 +16,7 @@ class FileStorage:
         if cls == None:
             return (FileStorage.__objects)
         cls = eval(cls)()
-        all_objs = {}
+        all_objects = {}
         for obj in FileStorage.__objects.keys():
             if type(FileStorage.__objects[obj]) == type(cls):
                 all_objects[obj] = FileStorage.__objects[obj]

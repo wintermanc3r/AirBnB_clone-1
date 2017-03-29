@@ -5,7 +5,6 @@ from sqlalchemy import Column, Integer, String, ForeignKey
 from sqlalchemy.orm import relationship
 from models import *
 
-
 class State(BaseModel, Base):
     if "HBNB_TYPE_STORAGE" in os.environ \
        and os.environ["HBNB_TYPE_STORAGE"] == "db":
@@ -23,4 +22,6 @@ class State(BaseModel, Base):
        or os.environ["HBNB_TYPE_STORAGE"] == "db":
           @property
           def cities(self):
-              storage.all("City")
+              from models import storage
+              all_cities = storage.all("City").values()
+              return [x for x in all_cities if x.state_id == self.id]
