@@ -13,7 +13,7 @@ def main():
     """
     Default route.
     """
-    return "Hello HBNB"
+    return "Hello HBNB!"
 
 if __name__ == "__main__":
     app.run()
