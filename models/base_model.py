@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 import os
-import datetime
+from datetime import datetime
 import uuid
 from sqlalchemy import Column, Integer, String
 from sqlalchemy.ext.declarative import declarative_base
@@ -20,24 +20,23 @@ class BaseModel():
        and os.environ["HBNB_TYPE_STORAGE"] == "db":
         id = Column(String(60), primary_key=True, nullable=False)
         created_at = Column(
-            DateTime, nullable=False, default=datetime.datetime.now())
+            DateTime, nullable=False, default=datetime.now())
         updated_at = Column(
-            DateTime, default=datetime.datetime.now(),
-            onupdate=datetime.datetime.now(),
+            DateTime, default=datetimenow(),
+            onupdate=datetime.now(),
             nullable=False)
 
     def __init__(self, *args, **kwargs):
         """initialize class object"""
-        self.created_at = datetime.datetime.now()
+        self.created_at = datetime.now()
         self.id = str(uuid.uuid4())
         if kwargs:
             for key, value in kwargs.items():
                 setattr(self, key, value)
-            self.save()
 
     def save(self):
         """method to update self"""
-        self.updated_at = datetime.datetime.now()
+        self.updated_at = datetime.now()
         from models import storage
         storage.new(self)
         storage.save()

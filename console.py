@@ -56,6 +56,7 @@ class HBNBCommand(cmd.Cmd):
                 except:
                     continue
             new_obj = eval(cname)(**kwrg)
+            new_obj.save()
             print(new_obj.id)
         else:
             print("** class doesn't exist **")

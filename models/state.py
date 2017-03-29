@@ -18,3 +18,9 @@ class State(BaseModel, Base):
 
     def __init__(self, *args, **kwargs):
         super(State, self).__init__(*args, **kwargs)
+
+    if "HBNB_TYPE_STORAGE" not in os.environ \
+       or os.environ["HBNB_TYPE_STORAGE"] == "db":
+          @property
+          def cities(self):
+              storage.all("City")

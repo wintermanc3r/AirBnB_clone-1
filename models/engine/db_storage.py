@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 import sys
 import os
-from sqlalchemy.orm import sessionmaker
+from sqlalchemy.orm import scoped_session, sessionmaker
 from sqlalchemy import *
 from models.base_model import Base
 from models.user import User
@@ -31,12 +31,13 @@ class DBStorage:
                           "Amenity": Amenity, "City": City,
                           "Place": Place, "Review": Review,
                           "State": State}
+        self.storage_type = "db"
 
     def all(self, cls=None):
         retval = {}
         if cls:
             for instance in self.__session.query(self.__classes[cls]):
-                retval.update(instance.id, instance)
+                retval.update({instance.id: instance})
             return (retval)
         else:
             for cls in ["User", "State", "City", "Amenity", "Place", "Review"]:
@@ -55,7 +56,9 @@ class DBStorage:
         if obj is not None:
             self.__session.delete(obj)
 
+    def close(self):
+        self.__session.remove()
+
     def reload(self):
         Base.metadata.create_all(self.__engine)
-        Session = sessionmaker(bind=self.__engine)
-        self.__session = Session()
+        self.__session = scoped_session(sessionmaker(bind=self.__engine))
