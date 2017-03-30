@@ -13,7 +13,7 @@ class FileStorage:
         self.reload()
 
     def all(self, cls=None):
-        if cls == None:
+        if cls is None:
             return (FileStorage.__objects)
         cls = eval(cls)()
         all_objects = {}
@@ -21,7 +21,6 @@ class FileStorage:
             if type(FileStorage.__objects[obj]) == type(cls):
                 all_objects[obj] = FileStorage.__objects[obj]
         return(all_objects)
-
 
     def new(self, obj):
         if obj is not None:
