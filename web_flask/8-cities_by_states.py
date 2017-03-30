@@ -93,11 +93,8 @@ def states_list():
 
 @app.route("/cities_by_states")
 def cities_by_states():
-    if storage.storage_type == "file":
-        print("File")
-    else:
-        print("DB")
-    return render_template('7-states_list.html', states=storage.all('State'))
+        return render_template('8-cities_by_states.html',
+                               states=storage.all('State'))
 
 
 if __name__ == "__main__":
