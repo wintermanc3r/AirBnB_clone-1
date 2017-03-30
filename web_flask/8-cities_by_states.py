@@ -93,10 +93,14 @@ def states_list():
 
 @app.route("/cities_by_states")
 def cities_by_states():
-    states = storage.all('State')
-    for state in states.keys():
+    try:
+        states = storage.all('State')
+        for state in states.keys():
+            return render_template('8-cities_by_states.html',
+                                   states=storage.all('State'))
+    except:
         return render_template('8-cities_by_states.html',
-                               states=storage.all('State'))
+                               states={})
 
 
 if __name__ == "__main__":
