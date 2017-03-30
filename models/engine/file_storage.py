@@ -39,17 +39,20 @@ class FileStorage:
             fd.write(json.dumps(store))
 
     def reload(self):
-        with open(FileStorage.__file_path,
-                  mode="r+", encoding="utf-8") as fd:
+        try:
+            with open(FileStorage.__file_path,
+                      mode="r+", encoding="utf-8") as fd:
+                FileStorage.__objects = {}
+                temp = json.load(fd)
+                for k in temp.keys():
+                    cls = temp[k].pop("__class__", None)
+                    cr_at = temp[k]["created_at"]
+                    cr_at = datetime.strptime(cr_at, "%Y-%m-%d %H:%M:%S.%f")
+                    up_at = temp[k]["updated_at"]
+                    up_at = datetime.strptime(up_at, "%Y-%m-%d %H:%M:%S.%f")
+                    FileStorage.__objects[k] = eval(cls)(**temp[k])
+        except:
             FileStorage.__objects = {}
-            temp = json.load(fd)
-            for k in temp.keys():
-                cls = temp[k].pop("__class__", None)
-                cr_at = temp[k]["created_at"]
-                cr_at = datetime.strptime(cr_at, "%Y-%m-%d %H:%M:%S.%f")
-                up_at = temp[k]["updated_at"]
-                up_at = datetime.strptime(up_at, "%Y-%m-%d %H:%M:%S.%f")
-                FileStorage.__objects[k] = eval(cls)(**temp[k])
 
     def delete(self, obj=None):
         if obj is None:
