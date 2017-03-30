@@ -20,7 +20,7 @@ class State(BaseModel, Base):
         super(State, self).__init__(*args, **kwargs)
 
     if ("HBNB_TYPE_STORAGE" not in os.environ or
-       os.environ["HBNB_TYPE_STORAGE"] == "db"):
+       os.environ["HBNB_TYPE_STORAGE"] != "db"):
         @property
         def cities(self):
             from models import storage
