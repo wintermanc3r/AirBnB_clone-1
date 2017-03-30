@@ -105,6 +105,5 @@ def all_state():
                            states=state, name=name)
 
 
-
 if __name__ == "__main__":
     app.run()
