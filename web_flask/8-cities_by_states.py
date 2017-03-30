@@ -91,7 +91,7 @@ def states_list():
     return render_template('7-states_list.html', states=storage.all('State'))
 
 
-@app.route("/cities_by_states")
+@app.route("/cities_by_states/")
 def cities_by_states():
     try:
         return render_template('8-cities_by_states.html',
